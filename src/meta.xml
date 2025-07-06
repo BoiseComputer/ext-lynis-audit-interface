@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <module>
     <id>lynis-audit-interface</id>
-    <name>Lynus Audit Interface</name>
+    <name>Lynis Audit Interface</name>
     <description>Run and review Lynis security audits from the Plesk interface. Admin-only access.</description>
     <category>security</category>
     <version>1.0.0</version>
     <release>1</release>
     <vendor>Boise Computer</vendor>
-    <url>https://github.com/BoiseComputer/ext-lynus-audit-interface</url>
+    <url>https://github.com/BoiseComputer/ext-lynis-audit-interface</url>
     <plesk_min_version>18.0.52</plesk_min_version>
 </module>

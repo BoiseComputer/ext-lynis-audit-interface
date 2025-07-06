@@ -1,6 +1,6 @@
 <?php
 
-namespace PleskExt\LynusAuditInterface;
+namespace PleskExt\LynisAuditInterface;
 
 class Helper
 {

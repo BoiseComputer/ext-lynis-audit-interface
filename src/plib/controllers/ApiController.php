@@ -1,6 +1,6 @@
 <?php
 
-use PleskExt\LynusAuditInterface\Helper;
+use PleskExt\LynisAuditInterface\Helper;
 
 class ApiController extends pm_Controller_Action
 {

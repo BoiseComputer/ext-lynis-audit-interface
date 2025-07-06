@@ -1,6 +1,6 @@
-# Lynus Audit Interface for Plesk
+# Lynis Audit Interface for Plesk
 
-The Lynus Audit Interface extension allows Plesk server administrators to install, run, and review Lynis security audits directly from the Plesk interface. Only server admins can access and use this extension.
+The Lynis Audit Interface extension allows Plesk server administrators to install, run, and review Lynis security audits directly from the Plesk interface. Only server admins can access and use this extension.
 
 ## Features
 - One-click Lynis installation (Debian/Ubuntu)

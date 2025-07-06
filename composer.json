@@ -1,16 +1,16 @@
 {
   "name": "boisecomputer/ext-lynis-audit-interface",
-  "description": "Lynus Audit Interface for Plesk: Run and review Lynis security audits from the Plesk interface.",
+  "description": "Lynis Audit Interface for Plesk: Run and review Lynis security audits from the Plesk interface.",
   "type": "project",
   "license": "Apache-2.0",
   "autoload": {
     "psr-4": {
-      "PleskExt\\LynusAuditInterface\\": "modules/lynis-audit-interface/library/"
+      "PleskExt\\LynisAuditInterface\\": "modules/lynis-audit-interface/library/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "PleskExt\\LynusAuditInterface\\": "src/plib/library/"
+      "PleskExt\\LynisAuditInterface\\": "src/plib/library/"
     }
   },
   "require": {

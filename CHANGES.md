@@ -1,7 +1,7 @@
 # Changelog
 
 ## 1.0.0 (2025-07-06)
-- Initial release of Lynus Audit Interface for Plesk.
+- Initial release of Lynis Audit Interface for Plesk.
 - Features:
   - One-click Lynis installation (Debian/Ubuntu)
   - Run Lynis security audits from the Plesk UI
