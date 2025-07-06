@@ -2,6 +2,8 @@
 
 This extension allows Plesk server administrators to run and review Lynis security audits directly from the Plesk interface.
 
+[Repository](https://github.com/BoiseComputer/ext-lynis-audit-interface)
+
 ## Features
 
 - One-click Lynis installation (Debian/Ubuntu)
