@@ -2,8 +2,8 @@
 
 $messages = [
     'app' => [
-        'Overview' => [
-            'title' => 'Overview',
+        'LynusAuditInterface' => [
+            'title' => 'Lynus Audit Interface',
         ],
     ],
 ];

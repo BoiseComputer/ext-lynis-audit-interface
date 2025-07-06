@@ -1,25 +1,25 @@
 {
-    "name": "plesk/ext-skeleton",
-    "description": "Plesk extension skeleton",
-    "type": "project",
-    "license": "Apache-2.0",
-    "autoload": {
-        "psr-4": {
-            "PleskExt\\Skeleton\\": "modules/skeleton/library/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "PleskExt\\Skeleton\\": "src/plib/library/"
-        }
-    },
-    "require": {
-        "php": ">=8.0"
-    },
-    "require-dev": {
-        "plesk/pm-api-stubs": "^18.0"
-    },
-    "config": {
-        "vendor-dir": "src/plib/vendor"
+  "name": "boisecomputer/ext-lynis-audit-interface",
+  "description": "Lynus Audit Interface for Plesk: Run and review Lynis security audits from the Plesk interface.",
+  "type": "project",
+  "license": "Apache-2.0",
+  "autoload": {
+    "psr-4": {
+      "PleskExt\\LynusAuditInterface\\": "modules/lynis-audit-interface/library/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PleskExt\\LynusAuditInterface\\": "src/plib/library/"
+    }
+  },
+  "require": {
+    "php": ">=8.0"
+  },
+  "require-dev": {
+    "plesk/pm-api-stubs": "^18.0"
+  },
+  "config": {
+    "vendor-dir": "src/plib/vendor"
+  }
 }

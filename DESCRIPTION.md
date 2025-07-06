@@ -1,24 +1,12 @@
-# Plesk extension skeleton
+# Lynus Audit Interface for Plesk
 
-The Plesk extension skeleton is a quick start for your new Plesk extension using the UI library.
+The Lynus Audit Interface extension allows Plesk server administrators to install, run, and review Lynis security audits directly from the Plesk interface. Only server admins can access and use this extension.
 
-## Getting Started
+## Features
+- One-click Lynis installation (Debian/Ubuntu)
+- Run Lynis security audits from the Plesk UI
+- View parsed audit results: hardening index, warnings, suggestions
+- Download/view raw Lynis report
+- Admin-only access for all actions
 
-Make sure your development environment has the following prerequisites installed:
-
-* PHP 8.0+
-* [Composer](https://getcomposer.org)
-* [Node.js](https://nodejs.org)
-* [Yarn](https://yarnpkg.com)
-
-Create a new project by running `composer create-project plesk/ext-skeleton my-extension`.
-
-Install dependencies and compile assets with `yarn install`.
-
-At this point, the extension is ready to be used.
-
-To deploy it, create a .zip archive with contents of the `/src` directory (except `/frontend` subdirectory). You can then upload this archive via Extension Catalog in Plesk UI, or use the [command line utility](https://docs.plesk.com/en-US/onyx/extensions-guide/extensions-management-utility.73617/).
-
-## License
-
-This project is licensed under the Apache License, Version 2.0 - see the [LICENSE](LICENSE) file for details.
+See the main README.md for installation and usage instructions.

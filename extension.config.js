@@ -3,6 +3,7 @@ module.exports = {
         {
             path: 'overview',
             component: 'Overview',
+            label: 'Lynus Audit Interface',
         },
     ],
 };

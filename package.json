@@ -1,6 +1,7 @@
 {
-  "name": "skeleton",
+  "name": "lynis-audit-interface",
   "version": "1.0.0",
+  "description": "Lynus Audit Interface for Plesk: Run and review Lynis security audits from the Plesk interface.",
   "license": "Apache-2.0",
   "dependencies": {
     "@plesk/plesk-ext-sdk": "0.6.3",
