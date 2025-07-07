@@ -30,18 +30,61 @@ class Helper
         return ['success' => false, 'message' => 'Failed to install Lynis. Output: ' . $output];
     }
 
+    // Check if a Lynis audit is currently running
+    public static function isLynisRunning(): bool
+    {
+        $output = shell_exec("ps -C lynis -o cmd= 2>/dev/null");
+        return !empty($output);
+    }
+
     // Run Lynis audit and save results
-    public static function runLynisAudit(): array
+    public static function runLynisAudit($options = []): array
     {
         if (!self::isLynisInstalled()) {
             return ['success' => false, 'message' => 'Lynis is not installed.'];
         }
+        if (self::isLynisRunning()) {
+            return ['success' => false, 'message' => 'A Lynis audit is already running. Please wait for it to finish.'];
+        }
         $reportFile = '/var/log/lynis-report.dat';
-        $output = shell_exec('lynis audit system --quick --no-colors > /tmp/lynis-output.txt 2>&1');
+        $cmd = 'lynis audit system';
+        // Add options
+        if (!empty($options['categories'])) {
+            $cats = escapeshellarg($options['categories']);
+            $cmd .= " --tests-category $cats";
+        }
+        if (!empty($options['skipTests'])) {
+            $skip = escapeshellarg($options['skipTests']);
+            $cmd .= " --skip-tests $skip";
+        }
+        if (!empty($options['extraParams'])) {
+            $cmd .= ' ' . $options['extraParams'];
+        }
+        // Always add these for UI
+        $cmd .= ' --no-colors --quick';
+        $output = shell_exec("$cmd > /tmp/lynis-output.txt 2>&1");
         if (file_exists($reportFile)) {
             return ['success' => true, 'message' => 'Audit completed.'];
         }
         return ['success' => false, 'message' => 'Audit failed. Output: ' . $output];
+    }
+
+    // Parse Lynis warning/suggestion lines into structured objects
+    private static function parseLynisMessage($line)
+    {
+        // Example: 'W:CODE|Description [test:TESTID] [solution:Remediation steps]'
+        $pattern = '/^(?P<code>[^|]+)\|(?P<description>[^\[]+)(\[test:(?P<test>[^\]]+)\])?(\[solution:(?P<remediation>[^\]]+)\])?/';
+        $result = [
+            'code' => null,
+            'description' => trim($line),
+            'remediation' => null
+        ];
+        if (preg_match($pattern, $line, $matches)) {
+            $result['code'] = isset($matches['code']) ? trim($matches['code']) : null;
+            $result['description'] = isset($matches['description']) ? trim($matches['description']) : trim($line);
+            $result['remediation'] = isset($matches['remediation']) ? trim($matches['remediation']) : null;
+        }
+        return $result;
     }
 
     // Parse and return latest Lynis audit results
@@ -60,10 +103,12 @@ class Helper
         ];
         foreach (explode("\n", $data) as $line) {
             if (strpos($line, 'warning[]=') === 0) {
-                $results['warnings'][] = substr($line, 9);
+                $msg = substr($line, 9);
+                $results['warnings'][] = self::parseLynisMessage($msg);
             }
             if (strpos($line, 'suggestion[]=') === 0) {
-                $results['suggestions'][] = substr($line, 13);
+                $msg = substr($line, 13);
+                $results['suggestions'][] = self::parseLynisMessage($msg);
             }
             if (strpos($line, 'hardening_index=') === 0) {
                 $results['score'] = substr($line, 16);

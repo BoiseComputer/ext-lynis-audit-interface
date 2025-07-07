@@ -4,30 +4,24 @@
 # Go to the src directory
 Set-Location src
 
-# Copy backend files from plib to src root (overwrite if they exist)
-Write-Host "Copying backend files to correct locations..."
-Copy-Item -Recurse -Force .\plib\controllers .\
-Copy-Item -Recurse -Force .\plib\library .\
-Copy-Item -Recurse -Force .\plib\resources .\
-
-# Verify the structure
+# Verify the structure exists
 Write-Host "Verifying structure..."
-if (Test-Path "controllers\ApiController.php") {
-    Write-Host "✓ controllers/ApiController.php exists"
+if (Test-Path "plib\controllers\ApiController.php") {
+    Write-Host "✓ plib/controllers/ApiController.php exists"
 } else {
-    Write-Host "✗ controllers/ApiController.php missing"
+    Write-Host "✗ plib/controllers/ApiController.php missing"
 }
 
-if (Test-Path "library\Helper.php") {
-    Write-Host "✓ library/Helper.php exists"
+if (Test-Path "plib\library\Helper.php") {
+    Write-Host "✓ plib/library/Helper.php exists"
 } else {
-    Write-Host "✗ library/Helper.php missing"
+    Write-Host "✗ plib/library/Helper.php missing"
 }
 
-if (Test-Path "resources\locales\en-US.php") {
-    Write-Host "✓ resources/locales/en-US.php exists"
+if (Test-Path "plib\resources\locales\en-US.php") {
+    Write-Host "✓ plib/resources/locales/en-US.php exists"
 } else {
-    Write-Host "✗ resources/locales/en-US.php missing"
+    Write-Host "✗ plib/resources/locales/en-US.php missing"
 }
 
 if (Test-Path "htdocs\index.php") {
@@ -50,16 +44,17 @@ if (Test-Path "..\lynis-audit-interface.zip") {
 
 # Create the ZIP with the correct structure
 Write-Host "Creating ZIP package..."
-Compress-Archive -Path controllers,library,resources,htdocs,meta.xml -DestinationPath ..\lynis-audit-interface.zip
+Compress-Archive -Path plib,htdocs,_meta,meta.xml -DestinationPath ..\lynis-audit-interface.zip
 
 Write-Host ""
 Write-Host "✓ Packaging complete! Archive is at lynis-audit-interface.zip"
 Write-Host ""
 Write-Host "The ZIP contains:"
-Write-Host "  controllers/ApiController.php"
-Write-Host "  library/Helper.php"
-Write-Host "  resources/locales/en-US.php"
+Write-Host "  plib/controllers/ApiController.php"
+Write-Host "  plib/library/Helper.php"
+Write-Host "  plib/resources/locales/en-US.php"
 Write-Host "  htdocs/index.php"
+Write-Host "  _meta/"
 Write-Host "  meta.xml"
 Write-Host ""
 Write-Host "Upload this ZIP to Plesk and remove any old/broken installs first."

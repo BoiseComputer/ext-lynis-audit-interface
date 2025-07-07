@@ -1,48 +1,47 @@
 <?php
-
-use PleskExt\LynisAuditInterface\Helper;
+require_once __DIR__ . '/../library/Helper.php';
 
 class ApiController extends pm_Controller_Action
 {
     protected $_accessLevel = 'admin';
-    
-    public function init()
-    {
-        parent::init();
-        $this->_helper->getHelper('contextSwitch')->addActionContext('*', 'json');
-        $this->_helper->getHelper('contextSwitch')->initContext('json');
-    }
 
     public function pingAction(): void
     {
-        $this->getHelper('json')->sendJson(Helper::getTime());
+        $this->_helper->json(['status' => 'ok', 'time' => time(), 'message' => 'API is working']);
+    }
+
+    // Test endpoint for debugging
+    public function testAction(): void
+    {
+        $this->_helper->json(['test' => 'success', 'timestamp' => date('Y-m-d H:i:s')]);
     }
 
     // Check if Lynis is installed
     public function checkLynisAction(): void
     {
-        $result = Helper::isLynisInstalled();
-        $this->getHelper('json')->sendJson(['installed' => $result]);
+        $installed = \PleskExt\LynisAuditInterface\Helper::isLynisInstalled();
+        $this->_helper->json(['installed' => $installed]);
     }
 
     // Install Lynis
     public function installLynisAction(): void
     {
-        $result = Helper::installLynis();
-        $this->getHelper('json')->sendJson(['success' => $result['success'], 'message' => $result['message']]);
+        $result = \PleskExt\LynisAuditInterface\Helper::installLynis();
+        $this->_helper->json($result);
     }
 
     // Run Lynis audit
     public function runAuditAction(): void
     {
-        $result = Helper::runLynisAudit();
-        $this->getHelper('json')->sendJson(['success' => $result['success'], 'message' => $result['message']]);
+        $params = $this->getRequest()->getParams();
+        $result = \PleskExt\LynisAuditInterface\Helper::runLynisAudit($params);
+        $this->_helper->json($result);
     }
 
     // Get latest Lynis audit results (parsed)
     public function getResultsAction(): void
     {
-        $result = Helper::getLynisResults();
-        $this->getHelper('json')->sendJson($result);
+        $result = \PleskExt\LynisAuditInterface\Helper::getLynisResults();
+        $this->_helper->json($result);
     }
 }
